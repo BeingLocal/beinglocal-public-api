@@ -11,7 +11,12 @@ const BASE_URL = "http://45.32.252.34:8080/being-local-api";
 
 router.get("/", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
-  res.write("<h1>Hello from Express.js!</h1>");
+  res.write(
+    "<style>body {background-color: #56ded8;text-align: center;margin-top: 10%;font-size: xx-large;text-transform: uppercase;}</style>"
+  );
+  res.write(
+    "<h1>Welcome To BeingLocal API</h1>"
+  );
   res.end();
 });
 
