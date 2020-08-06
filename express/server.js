@@ -25,14 +25,15 @@ router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
 
-router.get("/v1.0/product-categories", (req, res) => {
-   const api = axios.create({
-    baseURL: BASE_URL,
-  });
-  api.get(req.path).then((resp) => {
-    res.send(resp.data);
-  });
-});
+router.get("/v1.0/product-categories", delegate());
+
+router.get("/v1.0/product-category/:id/children", delegate());
+
+router.get("/v1.0/product-category/:id", delegate());
+
+router.get("/v1.0/countries", delegate());
+
+router.get("/v1.0/country/:id", delegate());
 
 
 app.use(cors())
@@ -42,3 +43,14 @@ app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 module.exports = app;
 module.exports.handler = serverless(app);
+function delegate() {
+  return (req, res) => {
+    const api = axios.create({
+      baseURL: BASE_URL,
+    });
+    api.get(req.path).then((resp) => {
+      res.send(resp.data);
+    });
+  };
+}
+
