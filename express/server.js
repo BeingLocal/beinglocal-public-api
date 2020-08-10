@@ -35,6 +35,10 @@ router.get("/v1.0/countries", delegate());
 
 router.get("/v1.0/country/:id", delegate());
 
+router.get("/v1.0/category/:id/brands", delegate());
+
+router.get("/v1.0/brand/:id", delegate());
+
 
 app.use(cors())
 app.use(bodyParser.json());
