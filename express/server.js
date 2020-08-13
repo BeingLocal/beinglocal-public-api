@@ -39,6 +39,20 @@ router.get("/v1.0/category/:id/brands", delegate());
 
 router.get("/v1.0/brand/:id", delegate());
 
+router.get("/v1.0/brands", (req, res) => {
+  let queryParams='?';
+  for (const key in req.query) {
+    if(undefined !== req.query[key]) {
+      queryParams = queryParams + key + '=' + req.query[key] + '&';
+    }
+  }
+  const api = axios.create({
+    baseURL: BASE_URL,
+  });
+  api.get(req.path+queryParams).then((resp) => {
+    res.send(resp.data);
+  });
+});
 
 app.use(cors())
 app.use(bodyParser.json());
