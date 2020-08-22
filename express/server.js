@@ -40,18 +40,11 @@ router.get("/v1.0/category/:id/brands", delegate());
 router.get("/v1.0/brand/:id", delegate());
 
 router.get("/v1.0/brands", (req, res) => {
-  let queryParams='?';
-  for (const key in req.query) {
-    if(undefined !== req.query[key]) {
-      queryParams = queryParams + key + '=' + req.query[key] + '&';
-    }
-  }
-  const api = axios.create({
-    baseURL: BASE_URL,
-  });
-  api.get(req.path+queryParams).then((resp) => {
-    res.send(resp.data);
-  });
+  searchWithQueryParam(req, res);
+});
+
+router.get("/v1.0/search", (req, res) => {
+  searchWithQueryParam(req, res);
 });
 
 app.use(cors())
@@ -61,6 +54,21 @@ app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 module.exports = app;
 module.exports.handler = serverless(app);
+function searchWithQueryParam(req, res) {
+  let queryParams = '?';
+  for (const key in req.query) {
+    if (undefined !== req.query[key]) {
+      queryParams = queryParams + key + '=' + req.query[key] + '&';
+    }
+  }
+  const api = axios.create({
+    baseURL: BASE_URL,
+  });
+  api.get(req.path + queryParams).then((resp) => {
+    res.send(resp.data);
+  });
+}
+
 function delegate() {
   return (req, res) => {
     const api = axios.create({
