@@ -43,6 +43,10 @@ router.get("/v1.0/brands", (req, res) => {
   searchWithQueryParam(req, res);
 });
 
+router.get("/v1.1/brands", (req, res) => {
+  searchWithQueryParam(req, res);
+});
+
 router.get("/v1.0/search", (req, res) => {
   searchWithQueryParam(req, res);
 });
