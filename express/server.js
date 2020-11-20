@@ -24,6 +24,9 @@ router.get("/", (req, res) => {
 router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
+router.post("/v1.0/brand/:id/rating", (req, res) => res.json({ postBody: req.body }));
+
+router.get("/v1.0/brand/:id/ratings", delegate());
 
 router.get("/v1.0/product-categories", delegate());
 
