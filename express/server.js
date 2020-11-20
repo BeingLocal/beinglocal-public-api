@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
 router.get("/another", (req, res) => res.json({ route: req.originalUrl }));
 router.post("/", (req, res) => res.json({ postBody: req.body }));
 
-router.post("/v1.0/brand/:id/rating", (req, res) => res.json(delegatePost({ postBody: req.body })));
+router.post("/v1.0/brand/:id/rating", delegatePost());
 
 router.get("/v1.0/brand/:id/ratings", delegate());
 
@@ -87,12 +87,12 @@ function delegate() {
   };
 }
 
-function delegatePost(request) {
+function delegatePost() {
   return (req, res) => {
     const api = axios.create({
       baseURL: BASE_URL,
     });
-    api.post(req.path,request.postBody).then((resp) => {
+    api.post(req.path,req.body).then((resp) => {
       res.send(resp.data);
     });
   };
