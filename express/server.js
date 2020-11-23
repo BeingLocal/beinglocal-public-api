@@ -30,6 +30,8 @@ router.get("/v1.0/brand/:id/ratings", delegate());
 
 router.get("/v1.0/rated-by/:id/ratings", delegate());
 
+router.get("/v1.0/brand/:id/overall-rating", delegate());
+
 router.get("/v1.0/product-categories", delegate());
 
 router.get("/v1.0/product-category/:id/children", delegate());
