@@ -28,6 +28,8 @@ router.post("/v1.0/brand/:id/rating", delegatePost());
 
 router.get("/v1.0/brand/:id/ratings", delegate());
 
+router.get("/v1.0/rated-by/:id/ratings", delegate());
+
 router.get("/v1.0/product-categories", delegate());
 
 router.get("/v1.0/product-category/:id/children", delegate());
